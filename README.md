@@ -135,4 +135,8 @@ Configuration properties:
  * **user** - mongo database user
  * **pass** - mongo database password
 
+ ## Contributing
+
+ For contributing to this repository or its documentation, see [Contributing guidelines](CONTRIBUTING.md).
+
 
