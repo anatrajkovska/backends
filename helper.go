@@ -2,7 +2,7 @@ package backends
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 	"reflect"
 	"strings"
 
@@ -30,21 +30,21 @@ func InterfaceToMap(object interface{}) (*map[string]interface{}, error) {
 			f := rValue.Field(i)
 			tag := typeOfObject.Field(i).Tag
 			key := typeOfObject.Field(i).Name
-			fmt.Println("InterfaceToMap:key")
-			fmt.Println(key)
+			log.Println("InterfaceToMap:key")
+			log.Println(key)
 			if bsonName, ok := tag.Lookup("bson"); ok {
 				key = bsonName
-				fmt.Println("InterfaceToMap:key bson")
-				fmt.Println(key)
+				log.Println("InterfaceToMap:key bson")
+				log.Println(key)
 			} else if jsonName, ok := tag.Lookup("json"); ok {
 				key = jsonName
-				fmt.Println("InterfaceToMap:key json")
-				fmt.Println(key)
+				log.Println("InterfaceToMap:key json")
+				log.Println(key)
 			}
 			if strings.Contains(key, ",") {
 				key = key[0:strings.Index(key, ",")]
-				fmt.Println("InterfaceToMap:key contains")
-				fmt.Println(key)
+				log.Println("InterfaceToMap:key contains")
+				log.Println(key)
 			}
 			value := f.Interface()
 			(*result)[key] = value
