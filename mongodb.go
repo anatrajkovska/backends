@@ -280,6 +280,8 @@ func (c *MongoCollection) Save(object interface{}, filter Filter) (interface{}, 
 	var result interface{}
 
 	payload, err := InterfaceToMap(object)
+	fmt.Println("Save:Payload")
+	fmt.Printf("%+v\n", payload)
 	if err != nil {
 		return nil, err
 	}
@@ -307,7 +309,8 @@ func (c *MongoCollection) Save(object interface{}, filter Filter) (interface{}, 
 		if err != nil {
 			return nil, err
 		}
-
+		fmt.Println("Save:Object")
+		fmt.Printf("%+v\n", object)
 		return object, nil
 	}
 
