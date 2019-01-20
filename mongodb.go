@@ -197,6 +197,7 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 	resultsTypeHint = AsPtr(resultsTypeHint)
 	results := NewSliceOfType(resultsTypeHint)
 	fmt.Println("****************************************************")
+	fmt.Printf("filter: %v", filter)
 
 	// Create a pointer to a slice value and set it to the slice
 	slicePointer := reflect.New(results.Type())
@@ -255,6 +256,12 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 			itemValue = reflect.Indirect(itemValue)
 			fmt.Printf("itemValue inside if: %v", itemValue)
 			fmt.Printf("itemType inside if: %v", itemType)
+		}
+
+		if itemType.Kind() == reflect.Struct {
+			fmt.Printf("ITEM IS STRUCT\n")
+			idValue := itemValue.FieldByName("_id")
+			fmt.Printf("idValue in struct is: %v", idValue)
 		}
 
 		if itemType.Kind() == reflect.Map {
