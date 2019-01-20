@@ -236,12 +236,16 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 		return nil, err
 	}
 
+	fmt.Printf("slicePointer.Interface() %v", slicePointer.Interface())
+
 	// results is always a Slice
 	err = IterateOverSlice(slicePointer.Interface(), func(i int, item interface{}) error {
 		fmt.Println("IterateOverSlice start ******************************")
 		if item == nil {
 			return nil // ignore
 		}
+
+		fmt.Printf("AJJJJTEEEEEM %v", item)
 
 		fmt.Println("IterateOverSlice after is nil ******************************")
 
