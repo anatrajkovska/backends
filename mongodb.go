@@ -259,7 +259,8 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 		}
 
 		if itemType.Kind() == reflect.Struct {
-			fmt.Printf("ITEM IS STRUCT\n")
+			fmt.Println("inside struct")
+			fmt.Printf("ITEM IS STRUCT\n %v", itemValue.FieldByName("_id"))
 			idValue := itemValue.FieldByName("_id")
 			fmt.Printf("idValue in struct is: %v", idValue)
 		}
