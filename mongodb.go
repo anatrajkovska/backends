@@ -196,6 +196,7 @@ func (c *MongoCollection) GetOne(filter Filter, result interface{}) (interface{}
 func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, order string, sorting string, limit int, offset int) (interface{}, error) {
 	resultsTypeHint = AsPtr(resultsTypeHint)
 	results := NewSliceOfType(resultsTypeHint)
+	fmt.Println("****************************************************")
 
 	// Create a pointer to a slice value and set it to the slice
 	slicePointer := reflect.New(results.Type())
