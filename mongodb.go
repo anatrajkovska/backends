@@ -252,14 +252,19 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 		if itemType.Kind() == reflect.Map {
 			// we have a map[string]<some-type>
 			idValue := itemValue.MapIndex(reflect.ValueOf("_id"))
+			fmt.Printf("idValue is %v", idValue)
 			if idValue.IsValid() {
+				fmt.Println("id is valid")
 				// ok,there is such value
 				if bsonID, ok := idValue.Interface().(bson.ObjectId); ok {
 					idStr := bsonID.Hex()
+					fmt.Printf("id is bson %v", idStr)
 					if c.repoDef.IsCustomID() {
+						fmt.Println("id is custom id")
 						// we have a custom handling on property "id", so we'll map _id => HEX(_id)
 						itemValue.SetMapIndex(reflect.ValueOf("_id"), reflect.ValueOf(idStr))
 					} else {
+						fmt.Printf("id default %v", reflect.ValueOf(idStr))
 						// no custom mapping set, so the default behaviour is to map id => HEX(_id)
 						itemValue.SetMapIndex(reflect.ValueOf("id"), reflect.ValueOf(idStr))
 						itemValue.SetMapIndex(reflect.ValueOf("_id"), reflect.Value{})
