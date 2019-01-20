@@ -237,16 +237,24 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 
 	// results is always a Slice
 	err = IterateOverSlice(slicePointer.Interface(), func(i int, item interface{}) error {
+		fmt.Println("IterateOverSlice start ******************************")
 		if item == nil {
 			return nil // ignore
 		}
 
+		fmt.Println("IterateOverSlice after is nil ******************************")
+
 		itemValue := reflect.ValueOf(item)
 		itemType := reflect.TypeOf(item)
+		fmt.Printf("itemValue: %v", itemValue)
+		fmt.Printf("itemType: %v", itemType)
 		if itemType.Kind() == reflect.Ptr {
+			fmt.Println("item is pointer *******************")
 			// item is pointer to something
 			itemType = itemType.Elem()
 			itemValue = reflect.Indirect(itemValue)
+			fmt.Printf("itemValue inside if: %v", itemValue)
+			fmt.Printf("itemType inside if: %v", itemType)
 		}
 
 		if itemType.Kind() == reflect.Map {
