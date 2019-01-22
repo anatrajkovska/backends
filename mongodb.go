@@ -219,8 +219,10 @@ func (c *MongoCollection) GetAll(filter Filter, resultsTypeHint interface{}, ord
 		if sorting == "desc" {
 			order = "-" + order
 		}
+		fmt.Printf("ORDERBEFORESORTING %v\n", order)
 		query = query.Sort(order)
 	}
+	fmt.Printf("ORDERAFTERSORTING %v\n", order)
 	if offset != 0 {
 		query = query.Skip(offset)
 	}
